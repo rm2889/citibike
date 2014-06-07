@@ -33,9 +33,19 @@ puts Geocoder::Calculations.distance_between(dbc_array_coords, home_array_coords
 # p response.methods
 # p response.body
 
+# Next steps:
 =begin
 
-create a bike class, which would have all this relevant info, and a city class, which
-would have a list of bike stations
+Need to precalculate and sort distance between starting location and all possible citibike
+locations using the gem, find the top 5, and send those top 5 citibike stops to the google
+distance matrix api to get the exact distance
+
+https://developers.google.com/maps/documentation/distancematrix/#DistanceMatrixRequests
+
+sort by distance (or walking duration), find the closest one, select that as the departure
+citibike station.
+
+Do the same thing with ending destination and all the citibike stops! Once that's done,
+call the directions api with your 4 points on the coordinate map
 
 =end

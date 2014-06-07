@@ -45,11 +45,5 @@ class Controller
 end
 
 controller = Controller.new
-# controller.get_json_data
 
-
-
-# location = Geocoder.search('48 Wall Street, New York, NY')
-# p location[0].latitude
-# p location[0].longitude
 
