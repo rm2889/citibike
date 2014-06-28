@@ -26,7 +26,28 @@ home_array_coords = [my_address[0].latitude, my_address[0].longitude]
 
 puts Geocoder::Calculations.distance_between(dbc_array_coords, home_array_coords)
 # puts Geocoder::Calculations.distance_between(location, my_address)
+def find_closest_bike(start_point)
+  station_list = get_station_list
+  location = Geocoder.search(start_point)
+  stations_array = []
+  station_list.each do |station|
+    distance = GeoDistance.distance(location[0].latitude, location[0].longitude, station["latitude"], station["longitude"]).miles.number
+    stations_array << [station, distance]
+  end
+  stations_array
+end
 
+
+def get_station_list
+  uri = URI.parse("http://www.citibikenyc.com/stations/json")
+  res = Net::HTTP.get_response(uri)
+  json_response = JSON.parse(res.body)
+  json_response["stationBeanList"]
+end
+
+x = find_closest_bike("7 Carmine Street, New York, NY")
+x.sort! {|a,b| a[1] <=> b[1]}
+p x.first
 
 
 # response = Net::HTTP.post_form(uri, {"search" => "Berlin"})
